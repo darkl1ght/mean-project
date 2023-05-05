@@ -40,6 +40,11 @@ build/Release
 
 # Dependency directories
 node_modules/
+frontend/node_modules/
+api/node_modules/
+.frontend/node_modules/
+.frontend/.angular/
+.api/node_modules/
 jspm_packages/
 
 # Snowpack dependency directory (https://snowpack.dev/)
