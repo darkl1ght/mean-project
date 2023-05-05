@@ -10,8 +10,6 @@ import { ProviderService } from 'src/app/service/provider.service';
 })
 export class AddPComponent {
   submitted: boolean = false;
-  // providers:ProviderClass[];
-  // provider = new ProviderClass();
 
   providersForm: FormGroup;
 
