@@ -10,8 +10,9 @@ import { ProviderService } from 'src/app/service/provider.service';
 })
 export class AddPComponent {
   submitted: boolean = false;
-
   providersForm: FormGroup;
+  emailError: boolean = false;
+  emailErrorMessage: string = '';
 
   constructor(private providerSvc: ProviderService) {
     this.providersForm = new FormGroup({
@@ -42,7 +43,6 @@ export class AddPComponent {
   submit = () => {
     const p = this.providersForm.value;
     const provider: IProvider = {
-      id: 123,
       firstname: p.firstname,
       lastname: p.lastname,
       position: p.position,
@@ -66,7 +66,10 @@ export class AddPComponent {
         this.submitted = true;
       },
       error: (error) => {
-        console.log(error);
+        if (error.error.status == 'error') {
+          this.emailError = true;
+          this.emailErrorMessage = error.error.error;
+        }
       },
     });
   };

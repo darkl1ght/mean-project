@@ -12,21 +12,25 @@ export class ProviderService {
 
   constructor(private http: HttpClient) {}
 
-  getAllProviders(): Observable<any> {
-    return this.http.get(this.apiUrl);
+  //get all provider
+  getAllProviders(): Observable<IProvider[]> {
+    return this.http.get<IProvider[]>(this.apiUrl);
   }
 
-  //get one provider
-  getProvider(id: number): Observable<any> {
-    return this.http.get(this.apiUrl + id);
+  //get provider by id
+  getProvider(id: string): Observable<IProvider> {
+    return this.http.get<IProvider>(this.apiUrl + id);
   }
 
-  //put-update record
-
-  // updateProvider(id: number, newProvider: ProviderClass): Observable<ProviderClass> {
-  //   return this.http.put<ProviderClass>(this.apiUrl + id, newProvider);
-
-  // }
+  //update provider by id
+  updateProvider(
+    id: string,
+    updatedProvider: IProvider
+  ): Observable<IProvider> {
+    return this.http.put<IProvider>(this.apiUrl + id, {
+      provider: updatedProvider,
+    });
+  }
 
   addProvider(provider: IProvider): Observable<any> {
     return this.http.post(this.apiUrl, { provider });
