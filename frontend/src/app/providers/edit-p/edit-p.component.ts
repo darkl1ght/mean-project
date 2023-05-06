@@ -14,7 +14,7 @@ export class EditPComponent {
   providersForm: FormGroup;
   emailError: boolean = false;
   emailErrorMessage: string = '';
-  id: string;
+  id!: string;
 
   ready: boolean = false;
   constructor(
@@ -43,8 +43,11 @@ export class EditPComponent {
       tagline: new FormControl(''),
     });
 
-    this.id = this.route.snapshot.paramMap.get('id') || '';
-    this.getProviderById();
+    // this.id = this.route.snapshot.paramMap.get('id') || '';
+    this.route.paramMap.subscribe((d) => {
+      this.id = d.get('id') || '';
+      this.getProviderById();
+    });
   }
   get f() {
     return this.providersForm.controls;

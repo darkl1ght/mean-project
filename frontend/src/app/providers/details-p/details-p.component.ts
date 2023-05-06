@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { IProvider } from 'src/app/model/providers.model';
+import { ProviderService } from 'src/app/service/provider.service';
 
 @Component({
   selector: 'app-details-p',
@@ -7,9 +9,22 @@ import { ActivatedRoute } from '@angular/router';
   styles: [],
 })
 export class DetailsPComponent implements OnInit {
-  id: string | null;
-  constructor(private route: ActivatedRoute) {
-    this.id = this.route.snapshot.paramMap.get('id');
+  provider!: IProvider;
+
+  id!: string;
+  constructor(
+    private route: ActivatedRoute,
+    private providerSvc: ProviderService
+  ) {
+    this.id = this.route.snapshot.paramMap.get('id') || '';
+    this.providerSvc.getProvider(this.id).subscribe({
+      next: (data) => {
+        this.provider = data;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
   ngOnInit(): void {}
 }
