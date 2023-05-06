@@ -29,9 +29,16 @@ ProviderController.getProviderById = (req, res) => {
     });
 };
 
-ProviderController.createProvider = (req, res) => {
+ProviderController.createProvider = async (req, res) => {
   const providerPayload = req.body.provider;
-
+  const provider = await Provider.findOne({
+    "company.email": providerPayload.company.email,
+  });
+  if (provider) {
+    return res
+      .status(500)
+      .json({ status: "error", error: "Entered Email is already in use." });
+  }
   const providerDocument = new Provider(providerPayload);
   providerDocument
     .save()
@@ -39,9 +46,7 @@ ProviderController.createProvider = (req, res) => {
       res.status(201).json(provider);
     })
     .catch((err) => {
-      res
-        .status(500)
-        .json(err.code == 11000 ? { error: "email is duplicate" } : err);
+      res.status(500).json(err);
     });
 };
 
