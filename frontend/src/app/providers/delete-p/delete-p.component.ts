@@ -10,6 +10,7 @@ import { ProviderService } from 'src/app/service/provider.service';
 })
 export class DeletePComponent {
   ready: boolean = false;
+  companyName: string = '';
 
   id!: string;
   constructor(
@@ -21,6 +22,8 @@ export class DeletePComponent {
       next: (data) => {
         if (data.status === 'success') {
           this.ready = true;
+          console.log(data.result);
+          this.companyName = data.result.company.company_name;
         }
         // this.provider = data;
       },

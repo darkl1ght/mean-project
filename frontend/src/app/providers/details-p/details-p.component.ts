@@ -10,6 +10,7 @@ import { ProviderService } from 'src/app/service/provider.service';
 })
 export class DetailsPComponent implements OnInit {
   provider!: IProvider;
+  isDataLoaded: boolean = false;
 
   id!: string;
   constructor(
@@ -20,6 +21,7 @@ export class DetailsPComponent implements OnInit {
     this.providerSvc.getProvider(this.id).subscribe({
       next: (data) => {
         this.provider = data;
+        this.isDataLoaded = true;
       },
       error: (err) => {
         console.log(err);

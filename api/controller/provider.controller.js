@@ -56,7 +56,7 @@ ProviderController.deleteProviderById = (req, res) => {
       if (!result) {
         res.json({ status: "error", message: "provider does not exist" });
       } else {
-        res.json({ status: "success" });
+        res.json({ status: "success", result });
       }
     })
     .catch((err) => {

@@ -6,6 +6,7 @@ const ProviderSchema = new Schema({
   lastname: { type: String, required: true },
   position: { type: String, required: true },
   company: {
+    company_name: String,
     address: { type: String, required: true },
     address2: String,
     phone: { type: String, required: true },
